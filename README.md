@@ -2,7 +2,7 @@ Sentinel — Physics Firewall (IGS)
 
 Status: v0.1.5 — Frozen Master (Evidence Baseline)
 License: MIT
-Hardware Target: Teensy 4.1 + Feetech STS3215 Servo
+Hardware Target: Teensy 4.1 + Feetech STS3215 Servo (Adaptable to other TTL Serial Actuators)
 
 “The AI can hallucinate all it wants. The physics will not comply.”
 
