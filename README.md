@@ -1,76 +1,25 @@
-Sentinel — Physics Firewall (IGS)
+# Sentinel: The Physics Firewall (IGS)
 
-Status: v0.1.5 — Frozen Master (Evidence Baseline)
-License: MIT
-Hardware Target: Teensy 4.1 + Feetech STS3215 Servo (Adaptable to other TTL Serial Actuators)
+![Status](https://img.shields.io/badge/Status-v0.1.5_Frozen_Master-orange) ![License](https://img.shields.io/badge/License-MIT-green) ![Target](https://img.shields.io/badge/Target-Teensy_4.1_|_Feetech_STS-blue)
 
-“The AI can hallucinate all it wants. The physics will not comply.”
+> **“The AI can hallucinate all it wants. The physics will not comply.”**
 
-What this is
+## What this is
+Sentinel is an open-source **Hardware Root-of-Trust** for embodied AI. 
 
-Sentinel is an open-source Physics Firewall for robotics.
-It is a hardware interposer that sits between an upstream controller (including AI/LLM-based systems) and a physical actuator, enforcing non-negotiable safety invariants in real time.
+It is a physical interposer that sits between an upstream controller (including LLM-based agents or ROS 2 planners) and the physical actuators. It enforces non-negotiable safety invariants in real-time, independent of the AI's logic state.
 
-Sentinel does not try to make AI smarter.
-It makes unsafe physical commands impossible.
+Sentinel does not try to make AI smarter. **It makes unsafe physical commands impossible.**
 
-What it does (v0.1)
-	•	Observes actuator commands on the serial bus
-	•	Detects violations of a defined invariant (velocity limit)
-	•	Clamps unsafe commands to a safe value before they reach the motor
-	•	Emits a forensic log and a visible alert when an intervention occurs
+## Architecture
+Sentinel acts as a strict "Man-in-the-Middle" on the actuator bus. It does not originate commands; it observes, validates, and conditionally clamps commands that violate safety contracts.
 
-What it is not
-	•	Not AI alignment
-	•	Not software guardrails
-	•	Not multi-joint control (yet)
-	•	Not a safety certification claim
-
-Architecture (hardware interposer)
-
-[ Untrusted Controller / AI ]
-           |
-       USB Serial
-           |
-     [ Sentinel ]
-           |
-     1-Wire UART
-           |
-      [ Actuator ]
-
-Sentinel does not originate commands. It only observes, validates, and conditionally modifies commands already in flight.
-
-Current invariant (v0.1)
-	•	MAX_SPEED clamp on WRITE commands to the actuator target position register
-
-Future versions extend to additional invariants (e.g., torque limits, keep-out constraints).
-
-Reproducibility & safety
-
-All tests are performed with a fixed procedure and documented artifacts.
-Physical tests must follow the Safety Protocol defined in the invariant contract.
-
-Documentation (authoritative)
-	•	Invariant Contract (v0.1): docs/01-invariant-contract-v0.1.md
-	•	Test Matrix (v0.1): docs/02-test-matrix-v0.1.md
-	•	Evidence Pack (v0.1): docs/03-evidence-pack-v0.1.md
-	•	Assets (logs, media): docs/assets/
-
-Repository layout
-
-sentinel/
-├─ firmware/        # Teensy firmware (enforcement logic)
-├─ tools/           # Test harness / attack generator
-├─ hardware/        # PCB & wiring (future)
-└─ docs/            # Contracts, tests, evidence
-
-License
-
-MIT — intended for broad adoption across makers, labs, and integrators.
-
-⸻
-
-Invariant Governor Systems (IGS)
-Open-source hardware enforcement for actuator safety.
-
-⸻
+```mermaid
+graph TD
+    A[Untrusted AI / ROS 2] -->|Serial CMD| B(Sentinel Hardware)
+    B -->|Verified CMD| C[Actuator / Feetech STS]
+    B --x|Clamped CMD| D[Audit Log]
+    subgraph "Trust Boundary"
+    B
+    end
+    style B fill:#f96,stroke:#333,stroke-width:2px
