@@ -46,3 +46,8 @@ To reproduce the latency test results, wire the components as follows.
                                                                  | |     |     |
                                                            [+] [-] [S]
                                                         [  SG90 SERVO  ]
+
+Servo Wire,Signal,Teensy Pin,Color Code
+VCC (+),5V Power,5V (Vin),Red
+GND (-),Ground,G (GND),Brown or Black
+PWM (S),Signal,2,Orange or Yellow
