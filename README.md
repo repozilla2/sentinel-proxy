@@ -73,13 +73,3 @@ sentinel/
 **Invariant Governor Systems (IGS)** *Engineering Safety for the Age of Embodied AI.*
 
 ```
-
-***
-
-### **One Final Detail**
-In the **Documentation** section, I included links to three files (`01`, `02`, `03`).
-* You created **`01`** in the previous step. **That link works.**
-* **`02`** and **`03`** currently do not exist.
-    * **Recommendation:** To prevent a "404 Error" if Hanno clicks them, quickly create empty placeholder files for them in the `docs/` folder, just like you did for `01`. Even if they are blank, a blank page is better than a "File Not Found" error.
-
-```
