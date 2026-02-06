@@ -3,8 +3,11 @@ import time
 import sys
 
 # --- CONFIGURATION ---
-# Note: Users must update this port for their own machine
-SERIAL_PORT = '/dev/cu.usbmodem186720801' 
+# TODO: Replace with your actual port! 
+# Windows example: 'COM3'
+# Mac example: '/dev/cu.usbmodem12345'
+# Linux example: '/dev/ttyACM0'
+SERIAL_PORT = 'YOUR_SERIAL_PORT_HERE'
 BAUD_RATE = 9600
 
 def connect_to_sentinel():
