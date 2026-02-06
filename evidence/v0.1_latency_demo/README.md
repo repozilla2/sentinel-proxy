@@ -30,15 +30,15 @@ To reproduce the latency test results, wire the components as follows.
 | **Breadboard** | 1 | For common ground connections |
 | **Jumper Wires** | 3 | Male-to-Male (Red, Black, Yellow) |
 
-### Wiring Schematic
-**⚠️ Power Note:** The SG90 is powered directly from the Teensy's 5V pin (USB Power). For larger servos, use an external power supply.
-
 ### Pinout Table
 | Servo Wire | Signal | Teensy Pin | Color Code |
 | :--- | :--- | :--- | :--- |
 | **VCC (+)** | 5V Power | `5V` (Vin) | Red |
 | **GND (-)** | Ground | `G` (GND) | Brown or Black |
 | **PWM (S)** | Signal | `2` | Orange or Yellow |
+
+### Wiring Schematic
+**⚠️ Power Note:** The SG90 is powered directly from the Teensy's 5V pin (USB Power). For larger servos, use an external power supply.
 
 ```text
 [ HOST PC ] <==== USB Data =====> [ TEENSY 4.1 ]
