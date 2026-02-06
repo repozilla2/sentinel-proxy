@@ -16,3 +16,33 @@ This folder contains the raw test artifacts used to generate the "Hard Clamp" pr
 * Microcontroller: Teensy 4.1 (ARM Cortex-M7 @ 600MHz)
 * Actuator: SG90 Micro Servo
 * Communication: USB Serial (Virtual UART) @ 9600 baud (simulated bottleneck)
+
+## 🛠️ Hardware Setup (v0.1)
+
+To reproduce the latency test results, wire the components as follows. 
+
+### Bill of Materials (BOM)
+| Component | Qty | Notes |
+| :--- | :---: | :--- |
+| **Teensy 4.1** | 1 | Running Sentinel firmware (v0.1) |
+| **SG90 Micro Servo** | 1 | Or any standard PWM servo |
+| **Micro-USB Data Cable** | 1 | Connects Teensy to Host |
+| **Breadboard** | 1 | For common ground connections |
+| **Jumper Wires** | 3 | Male-to-Male (Red, Black, Yellow) |
+
+### Wiring Schematic
+**⚠️ Power Note:** The SG90 is powered directly from the Teensy's 5V pin (USB Power). For larger servos, use an external power supply.
+
+```text
+[ HOST PC ] <==== USB Data =====> [ TEENSY 4.1 ]
+                                      |
+                                      | [PIN 5V] ------------------+ (Red Wire)
+                                      |                            |
+                                      | [PIN GND] -----------------|-----+ (Brown/Black Wire)
+                                      |                            |     |
+                                      | [PIN 2] -------------------|-----|-----+ (Orange/Yellow Wire)
+                                      |                            |     |     |
+                                      +--------------------------+ |     |     |
+                                                                 | |     |     |
+                                                           [+] [-] [S]
+                                                        [  SG90 SERVO  ]
