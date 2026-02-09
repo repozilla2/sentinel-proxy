@@ -1,7 +1,7 @@
 import serial
 import time
 import sys
-
+# SPDX-License-Identifier: Apache-2.0
 # --- CONFIGURATION ---
 # TODO: Replace with your actual port! 
 # Windows example: 'COM3'
