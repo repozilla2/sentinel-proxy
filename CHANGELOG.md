@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## ⚠️ Verification Invalidation Policy
-**Critical:** This project is evidence-driven. Code changes invalidate previous safety evidence. Refer to these tags to know what must be re-verified:
+**Critical: This project is evidence-driven. Code changes invalidate previous safety evidence unless explicitly marked as documentation-only.
 
 * `[⚠️ RE-RUN: G2]`: Protocol parser changed. Re-run Fuzzing & MITM soak tests.
 * `[⚠️ RE-RUN: G3]`: Policy logic changed. Re-run Conformance Suite.
