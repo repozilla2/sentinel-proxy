@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 /*
  * SENTINEL v0.1 - PROOF OF CONCEPT
  * Target: Teensy 4.1
