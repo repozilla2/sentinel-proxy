@@ -1,75 +1,41 @@
 # Sentinel: The Physics Firewall (IGS)
 
-![Status](https://img.shields.io/badge/Status-v0.1.5_Frozen_Master-orange) ![License](https://img.shields.io/badge/License-MIT-green) ![Target](https://img.shields.io/badge/Target-Teensy_4.1_|_Feetech_STS-blue)
+![Status](https://img.shields.io/badge/Status-TRL--4_Bench_Prototype-orange)
+![SSC](https://img.shields.io/badge/SSC-v1.1_(Draft)-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Target](https://img.shields.io/badge/Target-Teensy_4.1_%7C_FeeTech_STS3215-0ea5e9)
 
 > **“The AI can hallucinate all it wants. The physics will not comply.”**
 
 ## What this is
-Sentinel is an open-source **Hardware Root-of-Trust** for embodied AI. 
+Sentinel is an open-source **hardware safety interposer** for embodied AI.
 
-It is a physical interposer that sits between an upstream controller (including LLM-based agents or ROS 2 planners) and the physical actuators. It enforces non-negotiable safety invariants in real-time, independent of the AI's logic state.
+It sits **between an untrusted upstream controller** (LLM agent, ROS 2 planner, teleop, etc.) and an **actuator interface**, enforcing deterministic safety limits at the signal boundary.
 
-Sentinel does not try to make AI smarter. **It makes unsafe physical commands impossible.**
+Sentinel does *not* try to make AI “aligned.”  
+It constrains the AI’s **physical authority**.
 
-## Architecture
-Sentinel acts as a strict "Man-in-the-Middle" on the actuator bus. It does not originate commands; it observes, validates, and conditionally clamps commands that violate safety contracts.
+## What Sentinel delivers (the GTM “one spine”)
+Sentinel is not just a board. The product is the **standard + proof system**:
+
+- **SSC (Sentinel Safety Contract) v1.1 (draft):** defines units, semantics, modes, stop behavior, and required evidence fields  
+  - **V_CAP:** actuator ticks/sec  
+  - **A_CAP:** actuator ticks/sec²  
+  - **Field Mode default:** `REWRITE` (clamp to caps + log), not nuisance-tripping  
+  - **Safe-stop default:** `HOLD` (effort-limited + latched), with slip monitoring & class-dependent escalation (roadmap)
+- **Conformance Harness:** repeatable tests anyone can run to verify enforcement behavior
+- **Evidence Packs:** machine-readable logs + measured performance distributions (P50/P95/P99), with integrity tooling (hash chain + verifier) as a gated milestone
+
+This repo is the **reference implementation** of that spine.
+
+## Architecture (MITM safety boundary)
+Sentinel acts as a strict “man-in-the-middle” on the actuator bus. It does not originate motion intent; it **observes → validates → rewrites/denies → forwards**.
 
 ```mermaid
 graph TD
-    A[Untrusted AI / ROS 2] -->|Serial CMD| B(Sentinel Hardware)
-    B -->|Verified CMD| C[Actuator / Feetech STS]
-    B --x|Clamped CMD| D[Audit Log]
+    A[Untrusted AI / ROS 2 / Teleop] -->|Actuator Commands| B[Sentinel Interposer]
+    B -->|Policy-Compliant Commands| C[Actuator Bus / Servo]
+    B -->|Enforcement Events| D[Host Logs / Evidence Pack]
     subgraph "Trust Boundary"
-    B
+      B
     end
-    style B fill:#f96,stroke:#333,stroke-width:2px
-
-```
-
-## Capabilities (v0.1)
-
-* **Bus Interception:** Transparently proxies the Feetech STS / TTL Serial protocol.
-* **Invariant Enforcement:** Detects violations (e.g., Velocity > 500 RPM) in `<10µs`.
-* **Active Clamping:** Modifies unsafe packets in-flight before they reach the motor registers.
-* **Forensic Logging:** Emits a signed log of the intervention for post-incident auditing.
-
-## What it is NOT
-
-* ❌ **Not AI Alignment:** We do not align the model's intent; we constrain its physical authority.
-* ❌ **Not Software Guardrails:** This runs on independent, bare-metal hardware, not inside the OS/Kernel.
-* ❌ **Not a Certification Claim:** Sentinel is a tool to *enable* certification, not a replacement for ISO 10218.
-
-## Verification Methodology (The "Golden Path")
-
-Sentinel follows a **"Trust but Verify"** engineering philosophy. All releases are validated against the **IGS Torture Matrix**:
-
-1. **Latency Determinism:** End-to-end signal propagation must remain `<100µs` under 100% bus load.
-2. **Adversarial Fuzzing:** The system is tested against an "Adversarial Agent" specifically trained to generate malformed and dangerous control packets.
-3. **Fail-Safe Defaults:** In the event of power loss or watchdog timeout, the bus tri-states to a safe (Hi-Z) halt.
-
-## Documentation
-
-* [Invariant Contract (v0.1)](https://www.google.com/search?q=docs/01-invariant-contract-v0.1.md)
-* [Test Matrix & Evidence](https://www.google.com/search?q=docs/02-test-matrix-v0.1.md)
-* [Evidence Pack](https://www.google.com/search?q=docs/03-evidence-pack-v0.1.md)
-
-## Repository Layout
-
-```text
-sentinel/
-├─ firmware/      # Teensy 4.1 enforcement logic (C++)
-├─ tools/         # Adversarial test harness (Python)
-├─ hardware/      # PCB Schematics (KiCad)
-└─ docs/          # Safety Contracts and Evidence Logs
-
-```
-
-## License
-
-**MIT License** — Designed for broad adoption by research labs, makers, and industrial integrators.
-
----
-
-**Invariant Governor Systems (IGS)** *Engineering Safety for the Age of Embodied AI.*
-
-```
