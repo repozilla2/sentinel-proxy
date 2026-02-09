@@ -36,8 +36,7 @@ The current proof‑of‑concept demonstrates a simple, concrete safety guarante
 - The enforcement event is logged for later review
 
 📺 **Video:** https://www.youtube.com/embed/bjI_DN_1DXA
-
-> **Simplified subtitle suggestion:**  
+ 
 > *“Sentinel allows normal motion inside a safe range — and clamps any out‑of‑range command to the configured limit.”*
 
 ---
