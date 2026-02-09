@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 /*
  * Sentinel Firmware v0.1
  * Target: Teensy 4.1
