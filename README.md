@@ -1,41 +1,46 @@
-# Sentinel: The Physics Firewall (IGS)
+# Sentinel — The Physics Firewall for Embodied AI
 
-![Status](https://img.shields.io/badge/Status-TRL--4_Bench_Prototype-orange)
-![SSC](https://img.shields.io/badge/SSC-v1.1_(Draft)-blue)
+![Status](https://img.shields.io/badge/Status-v0.1.x%20(TRL--4%20bench)-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Target](https://img.shields.io/badge/Target-Teensy_4.1_%7C_FeeTech_STS3215-0ea5e9)
+![Target](https://img.shields.io/badge/Target-Teensy%204.1%20%7C%20FeeTech%20STS-blue)
 
-> **“The AI can hallucinate all it wants. The physics will not comply.”**
+> “The AI can hallucinate all it wants. The physics will not comply.”
 
-## What this is
-Sentinel is an open-source **hardware safety interposer** for embodied AI.
+Sentinel is an **open-source hardware safety interposer** for embodied AI — plus an **executable safety contract (SSC)** and **conformance/evidence tooling** that make safety behavior *testable and reproducible*.
 
-It sits **between an untrusted upstream controller** (LLM agent, ROS 2 planner, teleop, etc.) and an **actuator interface**, enforcing deterministic safety limits at the signal boundary.
+It sits between an **untrusted upstream controller** (LLM agent, ROS2 planner, scripts, etc.) and an **actuator interface**, enforcing deterministic caps (starting with velocity/acceleration) and producing machine-readable evidence of enforcement.
 
-Sentinel does *not* try to make AI “aligned.”  
-It constrains the AI’s **physical authority**.
+---
 
-## What Sentinel delivers (the GTM “one spine”)
-Sentinel is not just a board. The product is the **standard + proof system**:
+## What Sentinel is (and is not)
 
-- **SSC (Sentinel Safety Contract) v1.1 (draft):** defines units, semantics, modes, stop behavior, and required evidence fields  
-  - **V_CAP:** actuator ticks/sec  
-  - **A_CAP:** actuator ticks/sec²  
-  - **Field Mode default:** `REWRITE` (clamp to caps + log), not nuisance-tripping  
-  - **Safe-stop default:** `HOLD` (effort-limited + latched), with slip monitoring & class-dependent escalation (roadmap)
-- **Conformance Harness:** repeatable tests anyone can run to verify enforcement behavior
-- **Evidence Packs:** machine-readable logs + measured performance distributions (P50/P95/P99), with integrity tooling (hash chain + verifier) as a gated milestone
+### ✅ Sentinel is
+- A **hardware interposer** on the actuator bus (trust boundary at the signal plane)
+- A **policy enforcement point** (caps, mode behavior, safe-stop semantics)
+- An **evidence engine** (logs + measured latency distributions, reproducible runs)
 
-This repo is the **reference implementation** of that spine.
+### ❌ Sentinel is not
+- **Not “AI alignment”** (it does not interpret intent)
+- **Not “robot certification”** (it helps generate evidence; it does not certify a robot)
+- **Not a substitute** for mechanical safety design, workspace constraints, or application policies
 
-## Architecture (MITM safety boundary)
-Sentinel acts as a strict “man-in-the-middle” on the actuator bus. It does not originate motion intent; it **observes → validates → rewrites/denies → forwards**.
+See: `SAFETY.md` (recommended to add)
+
+---
+
+## Current status (v0.1.x)
+- **TRL-4 (bench validated):** actuator-bus proxy + early enforcement demo artifacts
+- Primary dev target: **Teensy 4.1 + FeeTech STS-series single-wire TTL**
+- GTM direction: **standard-first adoption, evidence-first credibility**
+  - publish spec → conformance harness → evidence packs → installs → partners
+
+---
+
+## Architecture (trust boundary)
 
 ```mermaid
 graph TD
-    A[Untrusted AI / ROS 2 / Teleop] -->|Actuator Commands| B[Sentinel Interposer]
-    B -->|Policy-Compliant Commands| C[Actuator Bus / Servo]
-    B -->|Enforcement Events| D[Host Logs / Evidence Pack]
-    subgraph "Trust Boundary"
-      B
-    end
+  A[Untrusted Controller<br/>LLM / ROS2 / Scripts] -->|Commands| B[Sentinel Interposer<br/>(Trust Boundary)]
+  B -->|Allowed / Rewritten Commands| C[Actuator Bus<br/>(FeeTech STS)]
+  B -->|Audit / Evidence Logs| D[Evidence Pack]
+  style B fill:#ffcc99,stroke:#333,stroke-width:2px
