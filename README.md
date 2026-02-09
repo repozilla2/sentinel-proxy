@@ -48,9 +48,9 @@ Sentinel proxies actuator commands, enforces SSC rules, and emits evidence artif
 
 ```mermaid
 graph TD
-    A[Untrusted Controller<br/>(LLM / ROS 2 / Custom)] -->|Actuator Commands| B[Sentinel Safety Interposer]
-    B -->|Validated / Rewritten Commands| C[Actuator Bus / Servo]
-    B -->|Enforcement Events| D[Evidence Pack<br/>(Logs + Metrics)]
+    A[Untrusted AI / ROS 2] -->|Serial CMD| B(Sentinel Hardware)
+    B -->|Verified CMD| C[Actuator / Feetech STS]
+    B --x|Clamped CMD| D[Audit Log]
     subgraph "Trust Boundary"
     B
     end
