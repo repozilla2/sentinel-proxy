@@ -7,36 +7,48 @@
 
 > **“The AI can hallucinate all it wants. The physics will not comply.”**
 
-Sentinel is an open‑source **hardware safety interposer** for embodied AI — plus an **executable Safety Contract (SSC)** and **conformance tooling** that make safety claims **testable and reproducible**.
+Sentinel is an open-source **hardware safety interposer** (“physics firewall”) for embodied AI — plus an **executable Safety Contract (SSC)**, **conformance tests**, and **evidence packs** that make safety behavior **testable and reproducible**.
 
-It sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the **actuator interface**, enforcing deterministic limits and producing machine‑readable evidence.
+Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the **actuator interface**, enforcing deterministic limits and producing machine‑readable proof artifacts.
+
+---
+
+## Quick links
+
+- **Docs / Spec Hub:** https://invariantgovernor.com/
+- **Manifund:** https://manifund.org/projects/sentinel-the-physics-firewall-for-embodied-ai-open-source-hardware  
+- **Reference repo:** https://github.com/repozilla2/sentinel-proxy
+- **Docs in this repo:**  
+  - [Invariant Contract](docs/01-invariant-contract-v0.1.md)  
+  - [Test Matrix](docs/02-test-matrix-v0.1.md)  
+  - [Evidence Pack](docs/03-evidence-pack-v0.1.md)
 
 ---
 
 ## What this repo is (and what it’s not)
 
 ### ✅ Sentinel is
-- **A hardware interposer** (“physics firewall”) between upstream compute and actuator bus  
-- **A safety contract (SSC)**: units, semantics, modes, stop behavior, and required evidence fields  
-- **A conformance + evidence workflow**: tests + logs + distributions you can reproduce
+- A **hardware interposer** between upstream compute and an actuator bus
+- An **SSC (Safety Contract)**: units, semantics, modes, stop behavior, required evidence fields
+- A **conformance + evidence workflow**: tests + logs + distributions you can reproduce
 
 ### ❌ Sentinel is not
-- Not “AI alignment” — it constrains *physical authority*, not intent  
-- Not “software guardrails” — the enforcement runs on independent hardware  
-- Not “robot certification” — it’s a safety layer + evidence engine that supports certification work
+- Not “AI alignment” — we constrain *physical authority*, not intent  
+- Not “software guardrails” — enforcement is designed to run on independent hardware  
+- Not “robot certification” — Sentinel is a safety layer + evidence engine that supports certification work
 
 ---
 
 ## Demo (TRL‑4): Safe-range clamp proof of concept
 
-The current proof‑of‑concept demonstrates a simple, concrete safety guarantee:
+This repo’s current proof-of-concept demonstrates a simple, concrete safety guarantee:
 
-- The servo moves freely within a configured safe range (example: **10° → 170°**)  
-- When an out‑of‑range position is requested, **Sentinel clamps** it to the maximum safe limit  
-- The enforcement event is logged for later review
+- The actuator moves freely inside a configured safe range (example: **10° → 170°**)
+- When an out-of-range position is requested, **Sentinel clamps** it to the configured safe limit
+- The enforcement event is logged for review in the evidence pack
 
-📺 **Video:** https://www.youtube.com/embed/bjI_DN_1DXA
- 
+📺 **Video demo:** https://www.youtube.com/watch?v=bjI_DN_1DXA
+
 > *“Sentinel allows normal motion inside a safe range — and clamps any out‑of‑range command to the configured limit.”*
 
 ---
@@ -48,9 +60,11 @@ Sentinel proxies actuator commands, enforces SSC rules, and emits evidence artif
 ```mermaid
 graph TD
     A[Untrusted AI / ROS 2] -->|Serial CMD| B(Sentinel Hardware)
-    B -->|Verified CMD| C[Actuator / Feetech STS]
-    B --x|Clamped CMD| D[Audit Log]
+    B -->|Verified CMD| C[Actuator / FeeTech STS]
+    B --x|Clamped / Rewritten CMD| D[Evidence / Audit Log]
+
     subgraph "Trust Boundary"
-    B
+      B
     end
+
     style B fill:#f96,stroke:#333,stroke-width:2px
