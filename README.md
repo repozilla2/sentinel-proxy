@@ -68,7 +68,7 @@ graph TD
     end
 
     style B fill:#f96,stroke:#333,stroke-width:2px
-```markdown
+```
 ---
 
 ## Specification
