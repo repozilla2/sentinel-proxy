@@ -1,0 +1,177 @@
+{
+  "ep_version": "0.1",
+  "ep_id": "EP-20260211-001",
+  "status": "sample",
+  "generated_at_utc": "2026-02-11T00:00:00Z",
+
+  "project": {
+    "name": "Sentinel",
+    "repo": "https://github.com/repozilla2/sentinel-proxy",
+    "website": "https://invariantgovernor.com/"
+  },
+
+  "scope": {
+    "trl": "TRL-4",
+    "claim_boundary": [
+      "Not a safety-rated device",
+      "Not a robot certification claim",
+      "Claims are envelope-scoped and evidence-backed"
+    ],
+    "envelope": {
+      "actuator_class": "TTL serial smart servo (example)",
+      "bus": "UART (half-duplex)",
+      "invariant_focus": [
+        "Velocity clamp (actuator-native units)",
+        "Malformed packet handling",
+        "Anti-wedge robustness (parser/harness)"
+      ]
+    }
+  },
+
+  "build": {
+    "hardware": {
+      "interposer_class": "MCU interposer (Teensy-class)",
+      "board_revision": "prototype",
+      "power_notes": "Bench setup. Not field-hardened."
+    },
+    "firmware": {
+      "name": "sentinel-fw",
+      "version": "v0.1.5",
+      "build_id": "FW-20260211-A",
+      "git_commit": "REPLACE_WITH_COMMIT_SHA",
+      "compiler": "REPLACE_WITH_TOOLCHAIN",
+      "build_flags": ["REPLACE_WITH_FLAGS"]
+    },
+    "ssc": {
+      "version": "SSC v1.1 (draft)",
+      "canonical_url": "https://github.com/repozilla2/sentinel-proxy/tree/main/docs/ssc",
+      "contract_id": "SSC-1.1-DRAFT",
+      "caps": {
+        "units": {
+          "v_cap": "actuator_ticks_per_sec",
+          "a_cap": "actuator_ticks_per_sec2"
+        },
+        "global": {
+          "v_cap": 500,
+          "a_cap": 5000,
+          "field_policy": "REWRITE",
+          "stop_default": "HOLD"
+        },
+        "per_joint_overrides": {}
+      },
+      "modes": {
+        "teach": "log_only",
+        "field": "rewrite_and_log",
+        "maintenance": "restricted_override_logged"
+      }
+    }
+  },
+
+  "tests": {
+    "conformance_harness": {
+      "name": "conformance-harness",
+      "version": "v0.1 (draft)",
+      "git_commit": "REPLACE_WITH_COMMIT_SHA",
+      "runner": "local",
+      "notes": "Sample evidence pack for format review. Replace placeholders with real harness outputs."
+    },
+
+    "test_matrix": [
+      {
+        "test_id": "T001",
+        "name": "Pass-through baseline",
+        "goal": "Verify no behavior regression in transparent/log-only mode",
+        "method": "Run baseline motion script for N commands; compare error rates to baseline.",
+        "trials": 1,
+        "result": "PASS",
+        "metrics": {
+          "packets_observed": 1000,
+          "packets_forwarded": 1000,
+          "parse_errors": 0,
+          "wedge_count": 0
+        }
+      },
+      {
+        "test_id": "T002",
+        "name": "Velocity clamp (REWRITE)",
+        "goal": "Clamp out-of-bounds velocity field to V_CAP and log event",
+        "method": "Inject MOVE_GOAL with VEL > V_CAP; verify forwarded value == V_CAP; verify clamp event logged.",
+        "trials": 1000,
+        "result": "PASS",
+        "metrics": {
+          "commands_injected": 1000,
+          "violations_detected": 1000,
+          "rewrites_applied": 1000,
+          "violations_missed": 0,
+          "wedge_count": 0
+        },
+        "example_event": {
+          "requested_vel": 999,
+          "applied_vel": 500,
+          "mode": "FIELD",
+          "event_type": "CLAMP_REWRITE"
+        }
+      },
+      {
+        "test_id": "T003",
+        "name": "Malformed packet handling",
+        "goal": "Do not forward malformed traffic; remain stable",
+        "method": "Send malformed frames (bad length/CRC); verify dropped; verify no wedge.",
+        "trials": 500,
+        "result": "PASS",
+        "metrics": {
+          "malformed_injected": 500,
+          "malformed_dropped": 500,
+          "malformed_forwarded": 0,
+          "wedge_count": 0
+        }
+      },
+      {
+        "test_id": "T004",
+        "name": "Fuzz / anti-wedge smoke",
+        "goal": "Demonstrate parser/harness stability under random traffic",
+        "method": "Run fuzzer for fixed time budget; record wedge count.",
+        "trials": 1,
+        "result": "PASS",
+        "metrics": {
+          "fuzz_duration_sec": 300,
+          "wedge_count": 0,
+          "resets": 0
+        }
+      }
+    ]
+  },
+
+  "performance": {
+    "latency": {
+      "measurement_method": "external_logic_analyzer",
+      "signals": ["UART_RX", "UART_TX"],
+      "units": "ms",
+      "note": "Populate with real measured distributions. Do not treat video timestamps as measurement.",
+      "distributions": {
+        "p50": "REPLACE_WITH_VALUE",
+        "p95": "REPLACE_WITH_VALUE",
+        "p99": "REPLACE_WITH_VALUE"
+      }
+    }
+  },
+
+  "integrity": {
+    "hash_chain": {
+      "enabled": false,
+      "note": "Hash-chained logs + verifier are a milestone deliverable; this sample pack shows the intended fields.",
+      "root_hash": "REPLACE_WITH_HASH",
+      "log_hashes": []
+    },
+    "verifier": {
+      "tool": "ep_verify.py",
+      "status": "not_implemented",
+      "expected_behavior": "Validate schema, required fields, and (when enabled) hash-chain integrity."
+    }
+  },
+
+  "links": {
+    "manifund": "https://manifund.org/projects/sentinel-the-physics-firewall-for-embodied-ai-open-source-hardware",
+    "ssc_pdf": "https://invariantgovernor.com/assets/docs/SSC_v1_1_Draft.pdf"
+  }
+}
