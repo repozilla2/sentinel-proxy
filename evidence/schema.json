@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "required": [
+    "firmware_build_id",
+    "config_hash",
+    "trial_count",
+    "enforcement_count",
+    "wedge_count",
+    "latency_distribution"
+  ],
+  "properties": {
+    "firmware_build_id": { "type": "string" },
+    "config_hash": { "type": "string" },
+    "trial_count": { "type": "integer" },
+    "enforcement_count": { "type": "integer" },
+    "wedge_count": { "type": "integer" },
+    "latency_distribution": {
+      "type": "object",
+      "required": ["p50", "p95", "p99"],
+      "properties": {
+        "p50": { "type": "number" },
+        "p95": { "type": "number" },
+        "p99": { "type": "number" }
+      }
+    }
+  }
+}
