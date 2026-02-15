@@ -13,6 +13,8 @@ Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, cus
 
 Without an independent enforcement layer, an LLM/ROS stack can issue unsafe actuator commands directly to hardware.
 
+For example: a misconfigured planner can command full-speed motion into a hard stop, even if your high-level software stack believes limits are enforced.
+
 ---
 
 ## Open Review Requests
