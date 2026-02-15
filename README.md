@@ -11,12 +11,23 @@ Sentinel is an open-source **Actuation Clamp** for embodied AI: a hardware safet
 
 Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the **actuator interface**, enforcing deterministic caps and producing machine-readable proof artifacts.
 
-**Naming stack (current):**
-   •	Company → Invariant Governor Systems
-	•	Standard → SSC (Sentinel Safety Contract)
-	•	Category → Actuation Clamp
-	•	Implementation → Sentinel (transitioning to Obex)
-Claim boundary: command-plane clamp (v1), not power-plane interlock.
+## Naming Stack (Current)
+
+- **Company:** Invariant Governor Systems  
+- **Standard:** SSC (Sentinel Safety Contract)  
+- **Category:** Actuation Clamp  
+- **Reference Implementation:** Sentinel (transitioning to Obex)
+
+---
+
+## Claim Boundary (v1 Scope)
+
+Sentinel v1 implements a **command-plane Actuation Clamp**.
+
+It enforces deterministic caps by rewriting or rejecting non-conforming actuator commands at the signal boundary.
+
+It does **not** implement a power-plane interlock and does not cut motor power. Physical interlock behavior is gate-locked for future revisions.
+
 ---
 
 ## 🚀 Start Here (Evaluation-Oriented)
