@@ -38,10 +38,11 @@ This repository is structured so that safety claims can be independently inspect
 - **Docs / Spec Hub:** https://invariantgovernor.com/
 - **Manifund:** https://manifund.org/projects/sentinel-the-physics-firewall-for-embodied-ai-open-source-hardware  
 - **Reference repo:** https://github.com/repozilla2/sentinel-proxy
-- **Docs in this repo:**  
-  - [Invariant Contract](docs/01-invariant-contract-v0.1.md)  
-  - [Test Matrix](docs/02-test-matrix-v0.1.md)  
-  - [Evidence Pack](docs/03-evidence-pack-v0.1.md)
+- **Docs in this repo:**
+  - `/docs/README.md` (Documentation Hub)
+  - `/docs/EVALUATION.md` (How to evaluate)
+  - `/docs/ssc/` (SSC v1.1 specification)
+  - `/evidence/` (Schema + sample packs)
 
 ---
 
