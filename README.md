@@ -11,14 +11,16 @@ It is a hardware interposer defined by the **Sentinel Safety Contract (SSC)**, p
 
 Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the actuator interface, enforcing deterministic caps at the signal boundary and emitting machine-readable enforcement logs.
 
+Without an independent enforcement layer, an LLM/ROS stack can issue unsafe actuator commands directly to hardware.
+
 ---
 
-## Naming Stack (Current)
+## Project Structure
 
 - **Company:** Invariant Governor Systems  
 - **Standard:** SSC (Sentinel Safety Contract)  
 - **Category:** Actuation Clamp  
-- **Reference Implementation:** Sentinel (transitioning to Obex)
+- **Reference implementation:** Sentinel  
 
 ---
 
@@ -48,9 +50,9 @@ To evaluate Sentinel:
 
 4. **Reproduction guide**  
    → [docs/EVALUATION.md](docs/EVALUATION.md)
-   
-6. **Become a reproduction partner (3 slots)**  
-   → Open a “Reproduction Partner” issue and help break the schema.
+
+5. **Open a Reproduction Partner issue (no hardware required)**  
+   → [Apply here](https://github.com/repozilla2/sentinel-proxy/issues/new?template=reproduction_partner.md)
 
 This repository is structured so that safety claims can be independently inspected and reproduced.
 
@@ -78,7 +80,7 @@ This repository is structured so that safety claims can be independently inspect
 
 ---
 
-## Demo (TRL‑4): Safe-range clamp proof of concept
+## Demo (TRL-4): Safe-range clamp proof of concept
 
 This repo’s current proof-of-concept demonstrates a simple, concrete safety guarantee:
 
@@ -88,7 +90,7 @@ This repo’s current proof-of-concept demonstrates a simple, concrete safety gu
 
 📺 **Video demo:** https://www.youtube.com/watch?v=bjI_DN_1DXA
 
-> *“Sentinel allows normal motion inside a safe range — and clamps any out‑of‑range command to the configured limit.”*
+> *“Sentinel allows normal motion inside a safe range — and clamps any out-of-range command to the configured limit.”*
 
 ---
 
