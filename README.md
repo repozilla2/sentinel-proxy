@@ -5,11 +5,13 @@
 ![Software%20License](https://img.shields.io/badge/Software%20License-Apache--2.0-blue)
 ![Hardware%20License](https://img.shields.io/badge/Hardware%20License-CERN--OHL--P--2.0-purple)
 
-> **“The AI can hallucinate all it wants. The physics will not comply.”**
+Sentinel implements an open-source **Actuation Clamp** for embodied AI.
 
-Sentinel is an open-source **Actuation Clamp** for embodied AI: a hardware safety interposer defined by an **executable Safety Contract (SSC)**, plus **conformance tests** and **evidence packs** that make actuator-boundary safety claims **testable and reproducible**.
+It is a hardware interposer defined by the **Sentinel Safety Contract (SSC)**, plus a conformance harness and evidence pack workflow that make actuator-boundary safety claims inspectable and reproducible.
 
-Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the **actuator interface**, enforcing deterministic caps and producing machine-readable proof artifacts.
+Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the actuator interface, enforcing deterministic caps at the signal boundary and emitting machine-readable enforcement logs.
+
+---
 
 ## Naming Stack (Current)
 
@@ -20,60 +22,56 @@ Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, cus
 
 ---
 
-## Claim Boundary (v1 Scope)
+## Scope (v1)
 
 Sentinel v1 implements a **command-plane Actuation Clamp**.
 
-It enforces deterministic caps by rewriting or rejecting non-conforming actuator commands at the signal boundary.
+It rewrites or rejects non-conforming actuator commands according to SSC-defined caps (velocity, acceleration, effort).
 
-It does **not** implement a power-plane interlock and does not cut motor power. Physical interlock behavior is gate-locked for future revisions.
+It does **not** cut motor power and does not function as a safety-rated interlock.  
+Power-plane interlock behavior is explicitly deferred to future revisions.
 
 ---
 
 ## 🚀 Start Here (Evaluation-Oriented)
 
-If you want to evaluate Sentinel quickly:
+To evaluate Sentinel:
 
-1. **Read the SSC v1.1 spec**  
-   → `/docs/ssc/`  
+1. **SSC v1.1 specification**  
+   → [docs/ssc/](docs/ssc/)
 
-2. **Review the Evidence Pack schema**  
-   → `/evidence/schema.json`  
+2. **Evidence Pack schema**  
+   → [evidence/schema.json](evidence/schema.json)
 
-3. **Inspect a sample Evidence Pack**  
-   → `/evidence/packs/EP-20260211-001.json`  
+3. **Sample Evidence Pack**  
+   → [evidence/packs/EP-20260211-001.json](evidence/packs/EP-20260211-001.json)
 
-4. **See how to reproduce results**  
-   → `/docs/EVALUATION.md`  
+4. **Reproduction guide**  
+   → [docs/EVALUATION.md](docs/EVALUATION.md)
 
 This repository is structured so that safety claims can be independently inspected and reproduced.
 
 ---
 
-## Quick links
+## Quick Links
 
-- **Docs / Spec Hub:** https://invariantgovernor.com/
+- **Docs / Spec Hub:** https://invariantgovernor.com/  
 - **Manifund:** https://manifund.org/projects/sentinel-the-physics-firewall-for-embodied-ai-open-source-hardware  
-- **Reference repo:** https://github.com/repozilla2/sentinel-proxy
-- **Docs in this repo:**
-   - **Read the SSC v1.1 spec** → [docs/ssc/](docs/ssc/)
-   - **Review the Evidence Pack schema** → [evidence/schema.json](evidence/schema.json)
-   - **Inspect a sample Evidence Pack** → [evidence/packs/EP-20260211-001.json](evidence/packs/EP-20260211-001.json)
-   - **See how to reproduce results** → [docs/EVALUATION.md](docs/EVALUATION.md)
+- **Reference repo:** https://github.com/repozilla2/sentinel-proxy  
 
 ---
 
-## What this repo is (and what it’s not)
+## What this repo is (and what it is not)
 
 ### ✅ Sentinel is
-- An **Actuation Clamp** (hardware interposer) between upstream compute and an actuator bus
-- An **SSC (Safety Contract)**: units, semantics, modes, stop behavior, required evidence fields
-- A **conformance + evidence workflow**: tests + logs + distributions you can reproduce
+- An **Actuation Clamp** (hardware interposer) between upstream compute and an actuator bus  
+- An executable **Safety Contract (SSC)** defining caps, modes, and stop semantics  
+- A **conformance + evidence workflow** designed for reproducibility  
 
 ### ❌ Sentinel is not
-- Not “AI alignment” — we constrain *physical authority*, not intent  
-- Not “software guardrails” — enforcement is designed to run on independent hardware  
-- Not “robot certification” — Sentinel is a safety layer + evidence engine that supports certification work
+- Not an AI alignment system (it constrains physical authority, not intent)  
+- Not a software guardrail layer (enforcement runs independently of upstream logic)  
+- Not a certified functional safety device  
 
 ---
 
