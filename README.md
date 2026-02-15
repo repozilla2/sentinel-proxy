@@ -13,6 +13,26 @@ Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, cus
 
 ---
 
+## 🚀 Start Here (Evaluation-Oriented)
+
+If you want to evaluate Sentinel quickly:
+
+1. **Read the SSC v1.1 spec**  
+   → `/docs/ssc/`  
+
+2. **Review the Evidence Pack schema**  
+   → `/evidence/schema.json`  
+
+3. **Inspect a sample Evidence Pack**  
+   → `/evidence/packs/EP-20260211-001.json`  
+
+4. **See how to reproduce results**  
+   → `/docs/EVALUATION.md`  
+
+This repository is structured so that safety claims can be independently inspected and reproduced.
+
+---
+
 ## Quick links
 
 - **Docs / Spec Hub:** https://invariantgovernor.com/
