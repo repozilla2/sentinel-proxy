@@ -15,6 +15,15 @@ Without an independent enforcement layer, an LLM/ROS stack can issue unsafe actu
 
 ---
 
+## Open Review Requests
+
+- Evidence Pack Schema Review (No Hardware Required) → [#3](https://github.com/repozilla2/sentinel-proxy/issues/3)
+- Evidence Pack Alpha – Known Gaps → [#4](https://github.com/repozilla2/sentinel-proxy/issues/4)
+
+If you think this approach is flawed, please comment directly.
+
+---
+
 ## Project Structure
 
 - **Company:** Invariant Governor Systems  
