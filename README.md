@@ -44,10 +44,10 @@ This repository is structured so that safety claims can be independently inspect
 - **Manifund:** https://manifund.org/projects/sentinel-the-physics-firewall-for-embodied-ai-open-source-hardware  
 - **Reference repo:** https://github.com/repozilla2/sentinel-proxy
 - **Docs in this repo:**
-  - `/docs/README.md` (Documentation Hub)
-  - `/docs/EVALUATION.md` (How to evaluate)
-  - `/docs/ssc/` (SSC v1.1 specification)
-  - `/evidence/` (Schema + sample packs)
+1. **Read the SSC v1.1 spec** → [docs/ssc/](docs/ssc/)
+2. **Review the Evidence Pack schema** → [evidence/schema.json](evidence/schema.json)
+3. **Inspect a sample Evidence Pack** → [evidence/packs/EP-20260211-001.json](evidence/packs/EP-20260211-001.json)
+4. **See how to reproduce results** → [docs/EVALUATION.md](docs/EVALUATION.md)
 
 ---
 
