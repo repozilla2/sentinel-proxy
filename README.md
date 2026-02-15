@@ -48,6 +48,9 @@ To evaluate Sentinel:
 
 4. **Reproduction guide**  
    → [docs/EVALUATION.md](docs/EVALUATION.md)
+   
+6. **Become a reproduction partner (3 slots)**  
+   → Open a “Reproduction Partner” issue and help break the schema.
 
 This repository is structured so that safety claims can be independently inspected and reproduced.
 
