@@ -7,9 +7,14 @@
 
 > **“The AI can hallucinate all it wants. The physics will not comply.”**
 
-Sentinel is an open-source **hardware safety interposer** (“physics firewall”) for embodied AI — plus an **executable Safety Contract (SSC)**, **conformance tests**, and **evidence packs** that make safety behavior **testable and reproducible**.
+Sentinel is an open-source **Actuation Clamp** for embodied AI: a hardware safety interposer defined by an **executable Safety Contract (SSC)**, plus **conformance tests** and **evidence packs** that make actuator-boundary safety claims **testable and reproducible**.
 
-Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the **actuator interface**, enforcing deterministic limits and producing machine‑readable proof artifacts.
+Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the **actuator interface**, enforcing deterministic caps and producing machine-readable proof artifacts.
+
+**Naming stack (current):**
+- Category: **Actuation Clamp**
+- Standard: **SSC (Sentinel Safety Contract)**
+- Reference implementation: **Sentinel** (transitioning to **Obex**)
 
 ---
 
