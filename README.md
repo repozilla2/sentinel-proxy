@@ -54,7 +54,7 @@ This repository is structured so that safety claims can be independently inspect
 ## What this repo is (and what it’s not)
 
 ### ✅ Sentinel is
-- A **hardware interposer** between upstream compute and an actuator bus
+- An **Actuation Clamp** (hardware interposer) between upstream compute and an actuator bus
 - An **SSC (Safety Contract)**: units, semantics, modes, stop behavior, required evidence fields
 - A **conformance + evidence workflow**: tests + logs + distributions you can reproduce
 
