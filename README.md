@@ -46,7 +46,7 @@ This repository is structured so that safety claims can be independently inspect
 - **Docs in this repo:**
    - **Read the SSC v1.1 spec** → [docs/ssc/](docs/ssc/)
    - **Review the Evidence Pack schema** → [evidence/schema.json](evidence/schema.json)
-   - **Inspect a sample Evidence Pack** → [evidence/packs/EP-20260211-001.json]
+   - **Inspect a sample Evidence Pack** → [evidence/packs/EP-20260211-001.json](evidence/packs/EP-20260211-001.json)
    - **See how to reproduce results** → [docs/EVALUATION.md](docs/EVALUATION.md)
 
 ---
