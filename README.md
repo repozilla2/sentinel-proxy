@@ -129,4 +129,12 @@ graph TD
 
 Status: Evidence-scoped draft (TRL-4/5)
 
+---
 
+## Licensing
+
+Software in this repository is licensed under Apache-2.0.
+
+Hardware design files (when present) are licensed under CERN-OHL-P-2.0.
+
+See LICENSE files at repository root for details.
