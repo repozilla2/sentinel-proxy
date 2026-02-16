@@ -1,7 +1,7 @@
 {
   "ep_version": "0.1",
   "ep_id": "EP-20260211-001",
-  "status": "schema_template",
+  "status": "This is a schema template (no measured results)",
   "generated_at_utc": "2026-02-11T00:00:00Z",
   "note": "Schema validation only. No hardware tests executed. All test sections are structural placeholders; do not interpret as results.",
 
