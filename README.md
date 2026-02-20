@@ -1,15 +1,17 @@
-# Sentinel: The Physics Firewall for Embodied AI
+# Obex (Reference Implementation): The Physics Firewall for Embodied AI
 
 ![Status](https://img.shields.io/badge/Status-TRL--4%20Prototype-orange)
 ![Target](https://img.shields.io/badge/Target-Teensy%204.1%20%7C%20FeeTech%20STS-blue)
 ![Software%20License](https://img.shields.io/badge/Software%20License-Apache--2.0-blue)
 ![Hardware%20License](https://img.shields.io/badge/Hardware%20License-CERN--OHL--P--2.0-purple)
 
-Sentinel implements an open-source **Actuation Clamp** for embodied AI.
+> **Legacy note:** this repository name and some external links still contain the legacy label “sentinel” (e.g., `sentinel-proxy`, Manifund slug). Public naming is now: **SSC (standard)** + **Obex (reference implementation)**.
 
-It is a hardware interposer defined by the **Sentinel Safety Contract (SSC)**, plus a conformance harness and evidence pack workflow that make actuator-boundary safety claims inspectable and reproducible.
+Obex implements an open-source **Actuation Clamp** for embodied AI.
 
-Sentinel sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the actuator interface, enforcing deterministic caps at the signal boundary and emitting machine-readable enforcement logs.
+It is a hardware interposer defined by the **Safety Specification Contract (SSC)**, plus a conformance harness and evidence pack workflow that make actuator-boundary safety claims inspectable and reproducible.
+
+Obex sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the actuator interface, enforcing deterministic caps at the signal boundary and emitting machine-readable enforcement logs.
 
 Without an independent enforcement layer, an LLM/ROS stack can issue unsafe actuator commands directly to hardware.
 
@@ -29,15 +31,15 @@ If you think this approach is flawed, please comment directly.
 ## Project Structure
 
 - **Company:** Invariant Governor Systems  
-- **Standard:** SSC (Sentinel Safety Contract)  
+- **Standard:** SSC (Safety Specification Contract)  
 - **Category:** Actuation Clamp  
-- **Reference implementation:** Sentinel  
+- **Reference implementation:** Obex  
 
 ---
 
 ## Scope (v1)
 
-Sentinel v1 implements a **command-plane Actuation Clamp**.
+Obex v1 implements a **command-plane Actuation Clamp**.
 
 It rewrites or rejects non-conforming actuator commands according to SSC-defined caps (velocity, acceleration, effort).
 
@@ -48,7 +50,7 @@ Power-plane interlock behavior is explicitly deferred to future revisions.
 
 ## 🚀 Start Here (Evaluation-Oriented)
 
-To evaluate Sentinel:
+To evaluate Obex:
 
 1. **SSC v1.1 specification**  
    → [docs/ssc/](docs/ssc/)
@@ -65,7 +67,7 @@ To evaluate Sentinel:
 5. **Open a Reproduction Partner issue (no hardware required)**  
    → [Apply here](https://github.com/repozilla2/sentinel-proxy/issues/new?template=reproduction_partner.md)
 
-This repository is structured so that safety claims can be independently inspected and reproduced.
+This repository is structured so that conformance claims can be independently inspected and reproduced.
 
 ---
 
@@ -79,12 +81,12 @@ This repository is structured so that safety claims can be independently inspect
 
 ## What this repo is (and what it is not)
 
-### ✅ Sentinel is
+### ✅ Obex is
 - An **Actuation Clamp** (hardware interposer) between upstream compute and an actuator bus  
-- An executable **Safety Contract (SSC)** defining caps, modes, and stop semantics  
+- An executable **Safety Specification Contract (SSC)** defining caps, modes, and stop semantics  
 - A **conformance + evidence workflow** designed for reproducibility  
 
-### ❌ Sentinel is not
+### ❌ Obex is not
 - Not an AI alignment system (it constrains physical authority, not intent)  
 - Not a software guardrail layer (enforcement runs independently of upstream logic)  
 - Not a certified functional safety device  
@@ -93,15 +95,15 @@ This repository is structured so that safety claims can be independently inspect
 
 ## Demo (TRL-4): Safe-range clamp proof of concept
 
-This repo’s current proof-of-concept demonstrates a simple, concrete safety guarantee:
+This repo’s current proof-of-concept demonstrates a simple, concrete conformance claim:
 
 - The actuator moves freely inside a configured safe range (example: **10° → 170°**)
-- When an out-of-range position is requested, **Sentinel clamps** it to the configured safe limit
+- When an out-of-range position is requested, **Obex clamps** it to the configured safe limit
 - The enforcement event is logged for review in the evidence pack
 
 📺 **Video demo:** https://www.youtube.com/watch?v=bjI_DN_1DXA
 
-> *“Sentinel allows normal motion inside a safe range — and clamps any out-of-range command to the configured limit.”*
+> *“Obex allows normal motion inside a safe range — and clamps any out-of-range command to the configured limit.”*
 
 ---
 
