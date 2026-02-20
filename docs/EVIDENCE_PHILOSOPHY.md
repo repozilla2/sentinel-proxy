@@ -107,10 +107,3 @@ What SSC/Obex Does Not Do
 It enforces deterministic actuator-boundary constraints and publishes reproducible evidence of conformance.
 
 ⸻
-
-⸻
-
-What changed (so you can keep it consistent everywhere)
-	•	Replaced Sentinel with SSC/Obex (standard + reference implementation).
-	•	Tightened “safety claim” → “conformance claim” in the core principle (this matters).
-	•	Replaced “reduces risk” language with “enforces constraints + publishes evidence” (less liability, more precise).
