@@ -64,7 +64,7 @@ If limits exist, they are often:
 
 This creates a gap:
 
-> Safety claims at the actuation boundary are often narrative, not reproducible.
+> Conformance claims at the actuation boundary are often narrative, not reproducible.
 
 ---
 
