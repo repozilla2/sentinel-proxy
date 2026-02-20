@@ -105,7 +105,6 @@ This repo’s current proof-of-concept demonstrates a simple, concrete safety gu
 
 ---
 
-```md
 ## Architecture
 
 Obex proxies actuator commands, enforces SSC rules, and emits evidence artifacts.
