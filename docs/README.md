@@ -1,11 +1,11 @@
-# Sentinel Documentation Hub
+# SSC Documentation Hub
 
-This directory contains the public specification and evidence-first workflow for Sentinel.
+This directory contains the public specification and evidence-first workflow for **SSC (Safety Specification Contract)** and its reference implementation, **Obex**.
 
 ## Start Here
 
 - **Problem Statement (threat model + claim boundary):** `PROBLEM.md`
-- **Sentinel Safety Contract (SSC v1.1 Draft):** `ssc/SSC_v1_1.md`
+- **Safety Specification Contract (SSC v1.1 Draft):** `ssc/SSC_v1_1.md`
 
 ## Evidence & Testing
 
@@ -23,3 +23,5 @@ This directory contains the public specification and evidence-first workflow for
 - Evidence-scoped prototypes (TRL-4/5): reproducible enforcement + logs
 - Not safety-rated, not certification, not human-safety guarantee
 - Field hardening and bypass resistance are explicitly gate-locked
+
+> **Legacy note:** some repository slugs and older docs may still reference “Sentinel” (e.g., `sentinel-proxy`) until post-EP-002b cleanup.
