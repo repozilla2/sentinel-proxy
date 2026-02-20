@@ -13,7 +13,7 @@ Most safety mechanisms in embodied systems operate at higher layers:
 
 These share failure modes with the upstream controller.
 
-Sentinel addresses a narrower question:
+SSC/Obex address a narrower question:
 
 > What enforces physical limits if upstream software is wrong, compromised, or adversarial?
 
@@ -68,18 +68,18 @@ This creates a gap:
 
 ---
 
-## Sentinel’s Narrow Claim
+## The Narrow Claim (Evidence-Scoped)
 
-Sentinel does NOT claim:
+SSC/Obex do NOT claim:
 
 - Alignment
 - Human safety
 - Certification compliance
 - Full-system security
 
-Sentinel claims:
+SSC/Obex claim:
 
-1. Out-of-bounds actuator commands are clamped deterministically.
+1. Out-of-bounds actuator commands are clamped deterministically (within declared caps).
 2. Enforcement events are logged.
 3. Behavior is testable via a conformance harness.
 4. Evidence artifacts can be reproduced independently.
@@ -101,9 +101,9 @@ But authority over motion increases as well.
 If actuator-boundary invariants are not standardized early,
 deployment norms may form without reproducible enforcement.
 
-Sentinel explores whether:
+SSC explores whether:
 
-> "Actuator safety evidence" can become a standard artifact in embodied AI research.
+> "Actuator-boundary conformance evidence" can become a standard artifact in embodied AI research.
 
 ---
 
