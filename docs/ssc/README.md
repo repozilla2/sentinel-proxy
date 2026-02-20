@@ -1,6 +1,8 @@
-# Sentinel Safety Contract (SSC)
+# Safety Specification Contract (SSC)
 
-This directory contains draft versions of the Sentinel Safety Contract (SSC), a minimal, evidence-scoped specification for actuator-boundary enforcement in embodied AI systems.
+This directory contains draft versions of the Safety Specification Contract (SSC), a minimal, evidence-scoped specification for actuator-boundary enforcement in embodied AI systems.
+
+> Note: “Sentinel Safety Contract” was a legacy working expansion of SSC; SSC now formally means Safety Specification Contract.
 
 ## Current Version
 
@@ -19,7 +21,7 @@ SSC standardizes:
 - Stop behavior
 - Required machine-readable evidence fields
 
-The goal is to make actuator-boundary safety claims reproducible and comparable across labs.
+The goal is to make actuator-boundary conformance claims reproducible and comparable across labs.
 
 ## Licensing
 
