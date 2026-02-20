@@ -9,7 +9,7 @@
 
 Obex implements an open-source **Actuation Clamp** for embodied AI.
 
-It is a hardware interposer defined by the **Safety Specification Contract (SSC)**, plus a conformance harness and evidence pack workflow that make actuator-boundary safety claims inspectable and reproducible.
+It is a hardware interposer defined by the **Safety Specification Contract (SSC)**, plus a conformance harness and evidence pack workflow that make actuator-boundary conformance claims inspectable and reproducible.
 
 Obex sits between an **untrusted controller** (LLM agent, ROS 2 planner, custom stack) and the actuator interface, enforcing deterministic caps at the signal boundary and emitting machine-readable enforcement logs.
 
