@@ -127,7 +127,7 @@ graph TD
 
 ## Specification
 
-- Sentinel Safety Contract (SSC v1.1 Draft): docs/ssc/SSC_v1_1.md
+- Safety Specification Contract (SSC v1.1 Draft): docs/ssc/SSC_v1_1.md
 
 Status: Evidence-scoped draft (TRL-4/5)
 
