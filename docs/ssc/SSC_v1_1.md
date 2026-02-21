@@ -1,6 +1,10 @@
-Sentinel Safety Contract (SSC) v1.1
+Safety Specification Contract (SSC) v1.1
 
 Draft Outline — Evidence-Scoped
+
+Note: “Sentinel Safety Contract” was a legacy working expansion of SSC; SSC now formally means Safety Specification Contract.
+
+---
 
 1. Purpose
 
@@ -135,6 +139,6 @@ SSC v1.1 does not support:
 
 ⸻
 
-Status: Draft for feedback
-Target: TRL-5 reproducible partner validation
+Status: Draft for feedback  
+Target: TRL-5 reproducible partner validation  
 License: Apache-2.0 (software) • CERN-OHL-P-2.0 (hardware)
