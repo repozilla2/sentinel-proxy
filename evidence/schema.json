@@ -1,26 +1,76 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "firmware_build_id",
     "config_hash",
     "trial_count",
     "enforcement_count",
     "wedge_count",
+    "latency_unit",
     "latency_distribution"
   ],
   "properties": {
-    "firmware_build_id": { "type": "string" },
-    "config_hash": { "type": "string" },
-    "trial_count": { "type": "integer" },
-    "enforcement_count": { "type": "integer" },
-    "wedge_count": { "type": "integer" },
+    "firmware_build_id": {
+      "type": "string",
+      "minLength": 1
+    },
+
+    "config_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+
+    "trial_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+
+    "enforcement_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+
+    "wedge_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+
+    "latency_unit": {
+      "type": "string",
+      "enum": ["us"]
+    },
+
     "latency_distribution": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["p50", "p95", "p99"],
       "properties": {
-        "p50": { "type": "number" },
-        "p95": { "type": "number" },
-        "p99": { "type": "number" }
+        "p50": {
+          "type": "number",
+          "minimum": 0
+        },
+        "p95": {
+          "type": "number",
+          "minimum": 0
+        },
+        "p99": {
+          "type": "number",
+          "minimum": 0
+        },
+        "min": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max": {
+          "type": "number",
+          "minimum": 0
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 0
+        }
       }
     }
   }
