@@ -127,7 +127,7 @@
     "latency": {
       "measurement_method": "external_logic_analyzer",
       "signals": ["UART_RX", "UART_TX"],
-      "units": "ms",
+      "units": "us",
       "note": "Template only. Populate with measured distributions in EP-002+.",
       "distributions": {
         "p50": null,
